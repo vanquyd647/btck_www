@@ -1,0 +1,163 @@
+.container-pr-detail {
+	display: flex;
+	flex-direction: row;
+	justify-content: center; /* Center horizontally */
+	align-items: flex-start; /* Align items to the start */
+	margin: 20px auto; /* Center the container */
+	margin-top: 150px;
+	max-width: 1200px; /* Set a maximum width */
+}
+
+.container-details-2 {
+	margin-left: 200px;
+}
+
+.imgpr-detail {
+	width: 510px;
+	height: 510px;
+	border-radius: 10px;
+	object-fit: cover;
+	background-color: rgba(189, 182, 182, 0.493);
+	margin: 0 auto; /* Center image */
+}
+
+.despr-detail {
+	font-size: 20px;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	width: 600px; /* Adjust width if needed */
+	text-align: justify; /* Justify text */
+	line-height: 1.6; /* Line height for readability */
+}
+
+.pricepr-detail {
+	font-size: 30px;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	color: green;
+}
+
+.addbtn-detail {
+	background-color: rgb(42, 194, 169);
+	color: white;
+	border: none;
+	height: 50px;
+	width: 250px; /* Set width for buttons */
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	font-family: Arial, sans-serif;
+	margin: 20px 0 40px 0; /* Add margin for spacing */
+}
+
+.form {
+	display: flex;
+	align-items: center;
+	margin: 30px 0 20px 0; /* Spacing for the form */
+}
+
+.quantity-btn {
+	background-color: rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
+	border: none;
+	padding: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 20px;
+	font-family: Arial, sans-serif;
+	width: 40px;
+	text-align: center;
+	border: 1px solid #ccc;
+}
+
+.input-amount {
+	width: 60px;
+	font-size: 20px;
+	font-family: Arial, sans-serif;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin: 0 10px;
+}
+
+.description-title {
+	font-size: 30px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	margin-bottom: 10px;
+}
+
+.description-content {
+	font-size: 16px;
+	margin-bottom: 20px;
+	overflow: hidden;
+	max-height: 200px; /* Set a max-height for collapsed content */
+	transition: max-height 0.3s ease;
+}
+
+.description-content.expanded {
+	max-height: 1000px; /* Increase to show content when expanded */
+}
+
+.section-title {
+	font-size: 25px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	margin-bottom: 5px;
+	position: relative;
+}
+
+.section-title::after {
+	content: '';
+	display: block;
+	width: 100px;
+	height: 2px;
+	background-color: red;
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+}
+
+.button-container {
+	text-align: center; /* Center button container */
+	width: 600px; /* Set width for button container */
+}
+
+.button {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 14px;
+	color: #000;
+	border: 1px solid #000;
+	border-radius: 20px;
+	text-decoration: none;
+	transition: background-color 0.3s, color 0.3s;
+	cursor: pointer;
+}
+
+.button:hover {
+	background-color: #000;
+	color: #fff;
+}
+
+.button i {
+	margin-right: 5px;
+}
+
+.color-dropdown, .size-dropdown {
+	height: 40px;
+	width: 200px;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	font-size: 16px;
+}
+
+.sizes, .colors {
+	margin: 20px 0; /* Add margin for spacing */
+}
+
+h3 {
+	font-size: 20px;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+	margin-bottom: 10px;
+}
