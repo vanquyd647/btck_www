@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import '../css/index.css'; // Đường dẫn tới file CSS của bạn
+import '../css/index.css';
 
-const Body = ({ message }) => {
+const Body = ({ message, slug }) => { // Accept slug as prop
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const pageSize = 30;
 
-    const navigate = useNavigate(); // Khởi tạo useNavigate
+    const navigate = useNavigate();
 
-    const handleNavigateToCollections = (slug) => {
-        navigate(`/product-detail/${slug}`); // Chuyển hướng đến trang collections với slug
+    const handleNavigateToCollections = (productSlug) => {
+        navigate(`/product-detail/${productSlug}`);
     };
 
     useEffect(() => {
-        fetchProducts(0, pageSize); // Fetch initial products
-    }, []);
+        if (slug) {
+            fetchProducts(0, pageSize); // Fetch products when slug changes
+        }
+    }, [slug]);
 
     const fetchProducts = async (page, size) => {
         try {
-            const response = await axios.get(`http://localhost:8088/api/v1/products?page=${page}&size=${size}`);
+            const response = await axios.get(`http://localhost:8088/api/v1/products/collections`, {
+                params: { name: slug, page, size }
+            });
+    
+            console.log('API Response:', response.data); // Check the API response here
+    
             const { products, totalPages } = response.data;
             if (products && products.length > 0) {
                 if (page === 0) {
@@ -35,22 +42,21 @@ const Body = ({ message }) => {
             console.error('Error fetching products:', error);
         }
     };
+    
 
     const manageLoadMoreButton = (totalPages) => {
         const loadMoreButton = document.getElementById("load-more-button");
-        loadMoreButton.style.display = (currentPage < totalPages - 1) ? "block" : "none"; // Show or hide button
+        loadMoreButton.style.display = (currentPage < totalPages - 1) ? "block" : "none";
     };
 
     const loadMoreProducts = () => {
-        fetchProducts(currentPage + 1, pageSize); // Fetch the next page
+        fetchProducts(currentPage + 1, pageSize);
     };
 
     return (
         <main>
             <div className="container-product">
-                <main>
-                    <p>{message}</p> {/* Hiển thị thông điệp từ props */}
-                </main>
+                <p>{message}</p> {/* Display message */}
                 <div className="products-home">
                     <h2>Sản phẩm nổi bật ✨</h2>
                     <div className="product-list">
@@ -59,17 +65,15 @@ const Body = ({ message }) => {
                                 const formattedPrice = product.price.toLocaleString('vi-VN') + ' đ';
                                 return (
                                     <div
-                                        key={`${product.slug}-${product.brand || ''}`} // Dùng slug và brand (hoặc bất kỳ thuộc tính nào khác) để tạo key duy nhất
+                                        key={`${product.slug}-${product.brand || ''}`}
                                         className="cartProduct"
-                                        onClick={() => handleNavigateToCollections(product.slug)} // Gọi hàm khi nhấp
+                                        onClick={() => handleNavigateToCollections(product.slug)}
                                     >
                                         <img loading="lazy" src={product.images[0]} className="imgProduct" alt="Product Image" />
                                         <div className="title">
                                             <div className="details">
-                                                <div className="title-1">
-                                                    <h2 className="nameProduct">{product.name}</h2>
-                                                    <p>Price: {formattedPrice}</p>
-                                                </div>
+                                                <h2 className="nameProduct">{product.name}</h2>
+                                                <p>Price: {formattedPrice}</p>
                                             </div>
                                         </div>
                                     </div>

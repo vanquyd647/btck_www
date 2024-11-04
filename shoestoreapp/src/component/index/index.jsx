@@ -5,7 +5,7 @@ import BannerFooter from "../index/BannerFooter";
 import Footer from "../index/Footer";
 import BannerHeader from "../index/BannerHeader";
 import Body from "../index/Body";
-import CategorySelect from "../../CategorySelect/CategorySelect";
+import CategorySelect from "../CategorySelect/CategorySelect";
 
 function IndexPage() {
     const [message, setMessage] = useState("Loading...");
