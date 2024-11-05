@@ -188,7 +188,7 @@ const ProductForm = () => {
                             <button type="button" onClick={() => removeOption('colors', index)}>Remove</button>
                         </div>
                     ))}
-                    <button type="button" onClick={() => addOption('colors')}>Add Color</button>
+                    <button type="button" onClick={() => addOption('colors')} style={{ padding: '5px 10px', backgroundColor: '#007bff ', color: '#fff', border: 'none', borderRadius: '5px' }}>Add Color</button>
                 </div>
 
                 {/* Sizes Section */}
@@ -223,7 +223,7 @@ const ProductForm = () => {
                             <button type="button" onClick={() => removeOption('sizes', index)}>Remove</button>
                         </div>
                     ))}
-                    <button type="button" onClick={() => addOption('sizes')}>Add Size</button>
+                    <button type="button" onClick={() => addOption('sizes')} style={{ padding: '5px 10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px' }}>Add Size</button>
                 </div>
 
                 {/* Materials Section */}
@@ -250,7 +250,7 @@ const ProductForm = () => {
                             <button type="button" onClick={() => removeOption('materials', index)}>Remove</button>
                         </div>
                     ))}
-                    <button type="button" onClick={() => addOption('materials')}>Add Material</button>
+                    <button type="button" onClick={() => addOption('materials')} style={{ padding: '5px 10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px' }}>Add Material</button>
                 </div>
 
                 {/* Images Section */}
@@ -276,7 +276,7 @@ const ProductForm = () => {
                             }}>Remove</button>
                         </div>
                     ))}
-                    <button type="button" onClick={() => setProduct({ ...product, images: [...product.images, ''] })}>Add Image</button>
+                    <button type="button" onClick={() => setProduct({ ...product, images: [...product.images, ''] })} style={{ padding: '5px 10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px' }}>Add Image</button>
                 </div>
 
                 {/* Ratings Section */}
@@ -303,12 +303,12 @@ const ProductForm = () => {
                         required
                     />
                 </div>
-                <button type="submit">Add Product</button>
+                <button type="submit" style={{ padding: '5px 10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px' }}>Add Product</button>
                 {/* JSON File Upload Section */}
                 <div style={{ marginTop: '20px' }}>
                     <h2>Upload Products from JSON File</h2>
                     <input type="file" accept=".json" onChange={handleFileChange} />
-                    <button type="button" onClick={handleFileUpload}>Upload Products</button>
+                    <button type="button" onClick={handleFileUpload} style={{ padding: '5px 10px', backgroundColor: 'green', color: '#fff', border: 'none', borderRadius: '5px' }}>Upload Products</button>
                 </div>
             </form>
 

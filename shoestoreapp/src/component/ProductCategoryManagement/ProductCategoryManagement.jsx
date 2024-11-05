@@ -171,18 +171,31 @@ function ProductCategoryManagement() {
                                     <td style={{ border: '1px solid #ddd', padding: '10px' }}>{category.product.shoe_id}</td>
                                     <td style={{ border: '1px solid #ddd', padding: '10px' }}>{category.product.name}</td>
                                     <td style={{ border: '1px solid #ddd', padding: '10px' }}>
-                                        <button onClick={() => deleteProductCategory(category.product.id, category.category.id)}>
-                                            Delete
+                                        <button onClick={() => deleteProductCategory(category.product.id, category.category.id)} style={{ padding: '5px 10px', backgroundColor: '#dc3545', color: '#fff', border: 'none', borderRadius: '5px' }}>
+                                            Xóa
                                         </button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                    <div>
-                        <button onClick={prevPage} disabled={currentPage <= 0} style={{ marginRight: '10px', padding: '10px 15px', borderRadius: '5px', backgroundColor: '#007bff', color: '#fff', border: 'none', cursor: 'pointer' }}>Previous</button>
-                        <span>{`Page ${currentPage + 1} of ${totalPages}`}</span>
-                        <button onClick={nextPage} disabled={currentPage >= totalPages - 1} style={{ marginRight: '10px', padding: '10px 15px', borderRadius: '5px', backgroundColor: '#007bff', color: '#fff', border: 'none', cursor: 'pointer' }}>Next</button>
+                    {/* Pagination */}
+                    <div style={{ marginTop: '20px' }}>
+                        <button
+                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))}
+                            disabled={currentPage <= 0}
+                            style={{ marginRight: '10px', padding: '10px 15px', borderRadius: '5px', backgroundColor: '#007bff', color: '#fff', border: 'none', cursor: 'pointer' }}
+                        >
+                            Previous
+                        </button>
+                        <span>Page {currentPage + 1} of {totalPages}</span>
+                        <button
+                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages - 1))}
+                            disabled={currentPage >= totalPages - 1}
+                            style={{ marginLeft: '10px', padding: '10px 15px', borderRadius: '5px', backgroundColor: '#007bff', color: '#fff', border: 'none', cursor: 'pointer' }}
+                        >
+                            Next
+                        </button>
                     </div>
                 </section>
 

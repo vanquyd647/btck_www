@@ -117,8 +117,8 @@ const UserManagement = () => {
                                     <td style={{ border: '1px solid #ddd', padding: '10px' }}>{user.address}</td>
                                     <td style={{ border: '1px solid #ddd', padding: '10px' }}>{user.role.name}</td>
                                     <td style={{ border: '1px solid #ddd', padding: '10px' }}>
-                                        <button onClick={() => navigate(`/admin/add-edit-user?id=${user.id}`)} style={{ marginRight: '10px' }}>Sửa</button>
-                                        <button onClick={() => deleteUser(user.id)}>Xóa</button>
+                                        <button onClick={() => navigate(`/admin/add-edit-user?id=${user.id}`)} style={{ marginRight: '5px', padding: '5px 10px', backgroundColor: '#ffc107', color: '#fff', border: 'none', borderRadius: '5px' }}>Sửa</button>
+                                        <button onClick={() => deleteUser(user.id)} style={{ padding: '5px 10px', backgroundColor: '#dc3545', color: '#fff', border: 'none', borderRadius: '5px' }}>Xóa</button>
                                     </td>
                                 </tr>
                             ))}

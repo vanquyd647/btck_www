@@ -42,12 +42,11 @@ const AddEditUser = () => {
         email: '',
         phone: '',
         address: '',
-        role: '', // Initialize as empty string
+        role: '',
         password: ''
     });
 
     useEffect(() => {
-        // If we have an ID, fetch the existing user
         if (userId) {
             axios.get(`http://localhost:8088/api/v1/admin/add-edit-user?id=${userId}`)
                 .then(response => {
@@ -58,7 +57,7 @@ const AddEditUser = () => {
                         email: user.email,
                         phone: user.phone,
                         address: user.address,
-                        role: user.role.name, // Set the role to the name of the role
+                        role: user.role.name,
                         password: user.password
                     });
                 })
@@ -76,11 +75,10 @@ const AddEditUser = () => {
         try {
             const userData = {
                 ...formData,
-                roleName: formData.role // This should match what your backend expects
+                roleName: formData.role
             };
 
-            // Remove role if you want to avoid sending it as part of userData
-            delete userData.role; // Only send roleName to backend
+            delete userData.role;
 
             await axios.post('http://localhost:8088/api/v1/admin/add-edit-user/save', userData, {
                 headers: {
@@ -110,33 +108,42 @@ const AddEditUser = () => {
             </div>
 
             {/* Main Content */}
-            <div style={{ flexGrow: 1, padding: '20px', overflowY: 'auto' }}>
-                <h1>{formData.id ? 'Chỉnh sửa người dùng' : 'Thêm mới người dùng'}</h1>
-                <form id="userForm" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: '400px' }}>
-                    <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required />
+            <div style={{
+                flexGrow: 1,
+                padding: '20px',
+                overflowY: 'auto',
+                display: 'flex',
+                justifyContent: 'center',
+                background: '#f4f4f4',
+            }}>
+                <div style={{ width: '400px' }}>
+                    <h1>{formData.id ? 'Chỉnh sửa người dùng' : 'Thêm mới người dùng'}</h1>
+                    <form id="userForm" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
+                        <label htmlFor="username">Username:</label>
+                        <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required />
 
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                        <label htmlFor="email">Email:</label>
+                        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
 
-                    <label htmlFor="phone">Phone:</label>
-                    <input type="text" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
+                        <label htmlFor="phone">Phone:</label>
+                        <input type="text" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
 
-                    <label htmlFor="address">Address:</label>
-                    <textarea id="address" name="address" value={formData.address} onChange={handleChange}></textarea>
+                        <label htmlFor="address">Address:</label>
+                        <textarea id="address" name="address" value={formData.address} onChange={handleChange}></textarea>
 
-                    <label htmlFor="role">Role:</label>
-                    <select id="role" name="role" value={formData.role} onChange={handleChange}>
-                        <option value="customer">Customer</option>
-                        <option value="admin">Admin</option>
-                        <option value="superadmin">Superadmin</option>
-                    </select>
+                        <label htmlFor="role">Role:</label>
+                        <select id="role" name="role" value={formData.role} onChange={handleChange}>
+                            <option value="customer">Customer</option>
+                            <option value="admin">Admin</option>
+                            <option value="superadmin">Superadmin</option>
+                        </select>
 
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
+                        <label htmlFor="password">Password:</label>
+                        <input type="password" id="password" name="password" value={formData.password} onChange={handleChange} />
 
-                    <button type="submit" style={{ marginTop: '20px', padding: '10px 15px', borderRadius: '5px', backgroundColor: '#007bff', color: '#fff', border: 'none', cursor: 'pointer' }}>Save</button>
-                </form>
+                        <button type="submit" style={{ marginTop: '20px', padding: '10px 15px', borderRadius: '5px', backgroundColor: 'green', color: '#fff', border: 'none', cursor: 'pointer' }}>Save</button>
+                    </form>
+                </div>
             </div>
         </div>
     );

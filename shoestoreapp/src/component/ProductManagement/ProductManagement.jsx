@@ -84,6 +84,10 @@ const ProductManagement = () => {
         }
     };
 
+    const handleNavigateToCollections = (slug) => {
+        navigate(`/product-detail/${slug}`); // Chuyển hướng đến trang collections với slug
+    };
+
     const limitWords = (text, wordLimit) => {
         const words = text.split(' ');
         return words.length > wordLimit ? words.slice(0, wordLimit).join(' ') + '...' : text;
@@ -151,8 +155,9 @@ const ProductManagement = () => {
                                     <td style={{ border: '1px solid #ddd', padding: '10px' }}>{product.categories.join(', ')}</td>
                                     <td style={{ border: '1px solid #ddd', padding: '10px' }}>{product.createdAt}</td>
                                     <td style={{ border: '1px solid #ddd', padding: '10px' }}>
-                                        <button onClick={() => navigate(`/admin/edit-product/${product.id}`)} style={{ marginRight: '10px' }}>Sửa</button>
-                                        <button onClick={() => deleteProduct(product.id)}>Xóa</button>
+                                        <button onClick={() => navigate(`/admin/edit-product/${product.id}`)} style={{ margin: '5px', padding: '5px 10px', backgroundColor: '#ffc107', color: '#fff', border: 'none', borderRadius: '5px' }}>Sửa</button>
+                                        <button onClick={() => handleNavigateToCollections(product.slug)} style={{margin: '5px', padding: '5px 10px', backgroundColor: '#e67e22', color: '#fff', border: 'none', borderRadius: '5px' }}>Xem chi tiết</button>
+                                        <button onClick={() => deleteProduct(product.id)} style={{margin: '5px', padding: '5px 10px', backgroundColor: '#dc3545', color: '#fff', border: 'none', borderRadius: '5px' }}>Xóa</button>
                                     </td>
                                 </tr>
                             ))}

@@ -12,7 +12,10 @@ import UserManagement from "./component/UserManagement/UserManagement";
 import ProductManagement from "./component/ProductManagement/ProductManagement";
 import AddEditUser from "./component/AddEditUser/AddEditUser";
 import CategoryManagement from "./component/CategoryManagement/CategoryManagement";
-import ProductCategoryManagement from "./component/ProductCategoryManagement/ProductCategoryManagement";  
+import ProductCategoryManagement from "./component/ProductCategoryManagement/ProductCategoryManagement"; 
+import EditProduct from "./component/EditProduct/EditProduct"; 
+import OrderManagement from "./component/OrderManagement/OrderManagement";
+import OrderDetails from "./component/OrderDetails/OrderDetails";
 
 function App() {
   return (
@@ -31,6 +34,9 @@ function App() {
         <Route path="/admin/add-edit-user" element={<AddEditUser />} />
         <Route path="/admin/category-management" element={<CategoryManagement />} />
         <Route path="/admin/product-category-management" element={<ProductCategoryManagement />} />
+        <Route path="/admin/edit-product/:slug" element={<EditProduct />} />
+        <Route path="/admin/order-management" element={<OrderManagement />} />
+        <Route path="/admin/order-details/:orderId" element={<OrderDetails />} />
       </Routes>
     </Router>
   );
