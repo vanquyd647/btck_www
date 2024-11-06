@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import IndexPage from "./component/index/index"; // Đảm bảo import đúng
 import ProductDetail from "./component/product-detail/product-detail";
@@ -18,6 +19,40 @@ import OrderManagement from "./component/OrderManagement/OrderManagement";
 import OrderDetails from "./component/OrderDetails/OrderDetails";
 
 function App() {
+  // Hàm làm mới token khi token hết hạn
+  const refreshAccessToken = async () => {
+    try {
+      const response = await axios.post("http://localhost:8088/api/v1/auth/refresh", {
+        refreshToken: localStorage.getItem("refreshToken"), // Giả định bạn đã lưu refresh token ở localStorage
+      });
+
+      const newAccessToken = response.data.token;
+      localStorage.setItem("token", newAccessToken); // Lưu token mới vào localStorage
+
+      return newAccessToken;
+    } catch (error) {
+      console.error("Làm mới token thất bại:", error);
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+      window.location.href = "/login"; // Nếu làm mới token thất bại, chuyển hướng đến trang đăng nhập
+    }
+  };
+
+  // Kiểm tra token khi ứng dụng khởi chạy
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      const tokenExpiration = payload.exp * 1000;
+      
+      console.log("Token expiration:", tokenExpiration);
+
+      // Nếu token đã hết hạn, làm mới token
+      if (Date.now() > tokenExpiration) {
+        refreshAccessToken();
+      }
+    }
+  }, []);
   return (
     <Router>
       <Routes>

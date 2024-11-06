@@ -21,12 +21,15 @@ function Menubar() {
         }
     }, []);
 
+    // Đồng bộ giỏ hàng của khách với người dùng đã đăng nhập
     const syncGuestCartToUserCart = async (userToken) => {
         const guestCart = JSON.parse(localStorage.getItem('guestCart')) || [];
         if (guestCart.length > 0) {
             try {
                 await Promise.all(
-                    guestCart.map(item => {
+                    guestCart.map(async (item) => {
+                        const validToken = userToken; // Sử dụng token người dùng đăng nhập thay vì làm mới token
+
                         const formData = new FormData();
                         formData.append('productId', item.product.id);
                         formData.append('selectedSize', item.selectedSize.id);
@@ -37,7 +40,7 @@ function Menubar() {
                             method: 'POST',
                             body: formData,
                             headers: {
-                                Authorization: `Bearer ${userToken}`,
+                                Authorization: `Bearer ${validToken}`,
                             },
                         });
                     })
@@ -51,6 +54,7 @@ function Menubar() {
         }
     };
 
+    // Mở modal đăng nhập
     const handleOpenModal = () => {
         if (role === "guest") {
             setShowModal(true);
@@ -59,10 +63,12 @@ function Menubar() {
         }
     };
 
+    // Đóng modal đăng nhập
     const handleCloseModal = () => {
         setShowModal(false);
     };
 
+    // Xử lý đăng nhập
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
@@ -75,7 +81,9 @@ function Menubar() {
             );
 
             const newToken = response.data.token;
+            const refreshToken = response.data.refreshToken; // Giả định API trả về refresh token
             localStorage.setItem("token", newToken);
+            localStorage.setItem("refreshToken", refreshToken); // Lưu refresh token
             localStorage.setItem("role", response.data.role);
             setToken(newToken);
 
@@ -83,7 +91,7 @@ function Menubar() {
             setRole(response.data.role);
             setShowModal(false);
 
-            // Sync guest cart once after successful login
+            // Đồng bộ giỏ hàng khách sau khi đăng nhập thành công
             await syncGuestCartToUserCart(newToken);
 
             window.location.href = "/";
@@ -92,6 +100,7 @@ function Menubar() {
         }
     };
 
+    // Xử lý đăng xuất
     const handleLogout = async () => {
         try {
             await axios.post("http://localhost:8088/api/v1/auth/logout", null, {
@@ -99,6 +108,7 @@ function Menubar() {
             });
 
             localStorage.removeItem("token");
+            localStorage.removeItem("refreshToken"); // Xóa refresh token
             localStorage.removeItem("role");
             setToken(null);
             setIsLoggedIn(false);
