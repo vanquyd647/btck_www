@@ -81,7 +81,8 @@ function Menubar() {
             );
 
             const newToken = response.data.token;
-            const refreshToken = response.data.refreshToken; // Giả định API trả về refresh token
+            const refreshToken = response.data.refreshToken;
+            
             localStorage.setItem("token", newToken);
             localStorage.setItem("refreshToken", refreshToken); // Lưu refresh token
             localStorage.setItem("role", response.data.role);
